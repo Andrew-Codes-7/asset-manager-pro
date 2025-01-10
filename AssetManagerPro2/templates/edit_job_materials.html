@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Container with shadowed box and gradient background -->
+    <div class="divs">
+                <h2 class="text-center mb-4">Edit Job Material(s)</h2>
+
+                <!-- Edit Job Material Form -->
+                <form method="POST" action="/edit_job_materials/{{ materials.id }}">
+                    <div class="form-group mb-3">
+                        <label for="job_number">Job Number</label>
+                        <input type="text" class="form-control" id="job_number" name="job_number" value="{{ materials.job_number }}" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" id="description" name="description" value="{{ materials.description }}" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="brand">Brand</label>
+                        <input type="text" class="form-control" id="brand" name="brand" value="{{ materials.brand }}" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="part_number">Part Number</label>
+                        <input type="text" class="form-control" id="part_number" name="part_number" value="{{ materials.part_number }}" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="quantity_received">Quantity Received</label>
+                        <input type="number" class="form-control" id="quantity_received" name="quantity_received" value="{{ materials.quantity_received }}" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="notes">Notes</label>
+                        <textarea class="form-control" id="notes" name="notes">{{ materials.notes }}</textarea>
+                    </div>
+
+                    <!-- Submit Button with modern styling -->
+                    <button type="submit" name="job_materials" class="btn btn-success btn-lg ">Save Changes</button>
+                </form>
+    </div>
+
+{% endblock %}

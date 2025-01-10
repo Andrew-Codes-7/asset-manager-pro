@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="divs">
+        <h2>Inventory</h2>
+
+        <!-- Add Vehicle Form -->
+        <h4>Add New Inventory</h4>
+        <form method="POST" action="/inventory/add">
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
+            <div class="form-group">
+                <label for="brand">Brand</label>
+                <input type="text" class="form-control" id="brand" name="brand" required>
+            </div>
+            <div class="form-group">
+                <label for="part_number">Part Number</label>
+                <input type="text" class="form-control" id="part_number" name="part_number" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="text" class="form-control" id="quantity" name="quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="last_updated">Last Updated</label>
+                <input type="text" class="form-control" id="last_updated" name="last_updated">
+            </div>
+            <button type="submit" name="add_inventory" class="btn btn-success mb-3">Add Inventory</button>
+        </form>
+
+        <!-- Vehicle List -->
+        <h4>Inventory List</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Brand</th>
+                    <th>Part Number</th>
+                    <th>Quantity</th>
+                    <th>Last Updated</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inv in inventory %}
+                    <tr>
+                        <td>{{ inv.description }}</td>
+                        <td>{{ inv.brand }}</td>
+                        <td>{{ inv.part_number }}</td>
+                        <td>{{ inv.quantity }}</td>
+                        <td>{{ inv.last_updated }}</td>
+                        <td>
+                            <!-- Edit Button (Redirects to Edit Page) -->
+                            <a href="{{ url_for('edit_inventory', id=inv.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                            <!-- Delete Vehicle -->
+                            <form action="/delete_inventory/{{ inv.id }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

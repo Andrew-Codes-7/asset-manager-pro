@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="divs">
+        <h2>Employee Management</h2>
+
+        <!-- Form to Add New Equipment -->
+        <h4>Add New Employee</h4>
+        <form method="POST" action="/employees/add">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <button type="submit" name="add_employee" class="btn btn-success mb-3">Add Employee</button>
+        </form>
+
+        <!-- Equipment List Table -->
+        <h4>Employee List</h4>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                    <tr>
+                        <td>{{ employee.name }}</td>
+                        <td>
+                            <!-- Edit Button -->
+                            <a href="{{ url_for('edit_employee', id=employee.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                            <!-- Delete Button -->
+                            <form action="/delete_employee/{{ employee.id }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

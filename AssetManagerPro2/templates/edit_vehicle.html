@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="divs">
+        <h2>Edit Vehicle</h2>
+
+        <!-- Edit Vehicle Form -->
+        <form method="POST" action="/edit_vehicle/{{ vehicle.id }}">
+            <div class="form-group">
+                <label for="number">Vehicle Number</label>
+                <input type="text" class="form-control" id="number" name="number" value="{{ vehicle.number }}" required>
+            </div>
+            <div class="form-group">
+                <label for="make">Make</label>
+                <input type="text" class="form-control" id="make" name="make" value="{{ vehicle.make }}" required>
+            </div>
+            <div class="form-group">
+                <label for="model">Model</label>
+                <input type="text" class="form-control" id="model" name="model" value="{{ vehicle.model }}" required>
+            </div>
+            <div class="form-group">
+                <label for="year">Year</label>
+                <input type="text" class="form-control" id="year" name="year" value="{{ vehicle.year }}" required>
+            </div>
+            <div class="form-group">
+                <label for="oil_change_date">Oil Change Date</label>
+                <input type="text" class="form-control" id="oil_change_date" name="oil_change_date" value="{{ vehicle.oil_change_date }}">
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea class="form-control" id="notes" name="notes">{{ vehicle.notes }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="driver">Assign Employee (Driver)</label>
+                <select class="form-control" id="driver" name="driver">
+                    <option value="">None</option>
+                    {% for employee in employees %}
+                        <option value="{{ employee.id }}" {% if employee.id == vehicle.driver_id %}selected{% endif %}>{{ employee.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" name="edit_vehicle" class="btn btn-success mb-3">Save Changes</button>
+        </form>
+
+    </div>
+
+{% endblock %}

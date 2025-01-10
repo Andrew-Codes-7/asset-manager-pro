@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="divs">
+        <h2>Edit Vehicle</h2>
+
+        <!-- Edit Vehicle Form -->
+        <form method="POST" action="/edit_inventory/{{ inventory.id }}">
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" name="description" value="{{ inventory.description }}" required>
+            </div>
+            <div class="form-group">
+                <label for="brand">Brand</label>
+                <input type="text" class="form-control" id="brand" name="brand" value="{{ inventory.brand }}" required>
+            </div>
+            <div class="form-group">
+                <label for="part_number">Part Number</label>
+                <input type="text" class="form-control" id="part_number" name="part_number" value="{{ inventory.part_number }}" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="text" class="form-control" id="quantity" name="quantity" value="{{ inventory.quantity }}" required>
+            </div>
+            <div class="form-group">
+                <label for="last_updated">Last Updated</label>
+                <input type="text" class="form-control" id="last_updated" name="last_updated" value="{{ inventory.last_updated }}">
+            </div>
+
+            <button type="submit" name="edit_inventory" class="btn btn-success mb-3">Save Changes</button>
+        </form>
+    </div>
+
+{% endblock %}

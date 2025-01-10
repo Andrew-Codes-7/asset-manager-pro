@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="myDiv" class="jumbotron text-center">
+        <h1 class="display-4">Welcome to Asset Manager Pro</h1>
+        <p class="lead">Manage Employees, Vehicles, Equipment, Inventory, and more from here.</p>
+    </div>
+
+    <!-- Grid Container for Cards -->
+    <div class="row">
+        <!-- Employees Section -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Employees</h3>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-primary mb-3" href="/employees" role="button">View All Employees</a>
+                    <h5>Last 5 Employees Added</h5>
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for employee in employees %}
+                                <tr>
+                                    <td>{{ employee.name }}</td>
+                                    <td><a href="/edit_employee/{{ employee.id }}" class="btn btn-info btn-sm">Edit</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vehicles Section -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Vehicles</h3>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-primary mb-3" href="/vehicles" role="button">View All Vehicles</a>
+                    <h5>Last 5 Vehicles Added</h5>
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Make</th>
+                                <th>Model</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for vehicle in vehicles %}
+                                <tr>
+                                    <td>{{ vehicle.number }}</td>
+                                    <td>{{ vehicle.make }}</td>
+                                    <td>{{ vehicle.model }}</td>
+                                    <td><a href="/edit_vehicle/{{ vehicle.id }}" class="btn btn-info btn-sm">Edit</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Equipment Section -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Equipment</h3>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-primary mb-3" href="/equipment" role="button">View All Equipment</a>
+                    <h5>Last 5 Equipment Added</h5>
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Brand</th>
+                                <th>Location</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for equip in equipment %}
+                                <tr>
+                                    <td>{{ equip.description }}</td>
+                                    <td>{{ equip.brand }}</td>
+                                    <td>{{ equip.location }}</td>
+                                    <td><a href="/edit_equipment/{{ equip.id }}" class="btn btn-info btn-sm">Edit</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional rows for other sections (Inventory, Job Materials, Maintenance) -->
+
+    <div class="row">
+        <!-- Inventory Section -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Inventory</h3>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-primary mb-3" href="/inventory" role="button">View All Inventory</a>
+                    <h5>Last 5 Inventory Items Added</h5>
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Brand</th>
+                                <th>Part Number</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in inventory %}
+                                <tr>
+                                    <td>{{ item.description }}</td>
+                                    <td>{{ item.brand }}</td>
+                                    <td>{{ item.part_number }}</td>
+                                    <td><a href="/edit_inventory/{{ item.id }}" class="btn btn-info btn-sm">Edit</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Job Materials Section -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Job Materials</h3>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-primary mb-3" href="/job_materials" role="button">View All Job Materials</a>
+                    <h5>Last 5 Job Materials Added</h5>
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th>Job Number</th>
+                                <th>Description</th>
+                                <th>Part Number</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for job in job_materials %}
+                                <tr>
+                                    <td>{{ job.job_number }}</td>
+                                    <td>{{ job.description }}</td>
+                                    <td>{{ job.part_number }}</td>
+                                    <td><a href="/edit_job_material/{{ job.id }}" class="btn btn-info btn-sm">Edit</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Maintenance Section -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Maintenance</h3>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-primary mb-3" href="/maintenance" role="button">View All Maintenance</a>
+                    <h5>Last 5 Maintenance Records</h5>
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th>Vehicle</th>
+                                <th>Notes</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for maintenance in maintenance %}
+                                <tr>
+                                    <td>{{ maintenance.vehicle.number }}</td>
+                                    <td>{{ maintenance.notes }}</td>
+                                    <td><a href="/edit_maintenance/{{ maintenance.id }}" class="btn btn-info btn-sm">Edit</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

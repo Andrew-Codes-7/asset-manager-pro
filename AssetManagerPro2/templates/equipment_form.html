@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% if equipment %}Edit Equipment{% else %}Add New Equipment{% endif %}</h2>
+
+    <form method="POST" action="{{ url_for('add_equipment' if not equipment else 'edit_equipment', id=equipment.id if equipment else '') }}">
+        <!-- Hidden Input for Equipment ID (only when editing) -->
+        {% if equipment %}
+            <input type="hidden" name="equipment_id" value="{{ equipment.id }}">
+        {% endif %}
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" name="description" value="{{ equipment.description if equipment else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand</label>
+            <input type="text" class="form-control" id="brand" name="brand" value="{{ equipment.brand if equipment else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="model">Model</label>
+            <input type="text" class="form-control" id="model" name="model" value="{{ equipment.model if equipment else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" id="location" name="location" value="{{ equipment.location if equipment else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="home">Home</label>
+            <input type="text" class="form-control" id="home" name="home" value="{{ equipment.home if equipment else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="employee">Assign Employee</label>
+            <select class="form-control" id="employee" name="employee">
+                <option value="">None</option>
+                {% for employee in employees %}
+                    <option value="{{ employee.id }}" {% if equipment and employee.id == equipment.employee_id %}selected{% endif %}>{{ employee.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success mb-3">
+            {% if equipment %}Save Changes{% else %}Add Equipment{% endif %}
+        </button>
+    </form>
+
+    <!-- Equipment List -->
+    <h4>Equipment List</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Location</th>
+                <th>Assigned Employee</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equip in equipment_list %}
+                <tr>
+                    <td>{{ equip.description }}</td>
+                    <td>{{ equip.brand }}</td>
+                    <td>{{ equip.model }}</td>
+                    <td>{{ equip.employee.name if equip.employee else 'None' }}</td>
+                    <td>
+                        <!-- Edit Button -->
+                        <a href="{{ url_for('edit_equipment', id=equip.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                        <!-- Delete Button -->
+                        <form action="{{ url_for('delete_equipment', id=equip.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

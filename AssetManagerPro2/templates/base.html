@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Management</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+    <!-- Custom Gradient and Styling -->
+    <style>
+
+        .divs{
+            background: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 1.5); /* Subtle shadow effect */
+            border-radius: 12px; /* Rounded corners for the cards */
+            padding: 10px;
+        }
+
+        #myDiv {
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 1.5); /* Subtle shadow effect */
+            border-radius: 8px; /* Rounded corners for the cards */
+        }
+        /* Gradient Background */
+        body {
+            background: linear-gradient(45deg, #6a11cb, #2575fc); /* Blue gradient */
+        }
+
+        /* Card Shadow Effect */
+        .card {
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 1.5); /* Subtle shadow effect */
+            border-radius: 8px; /* Rounded corners for the cards */
+            margin-bottom: 20px; /* Space between cards */
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 1.5);
+            background: rgba(255, 255, 255, 0.4); /* Transparent white navbar for contrast */
+            border-radius: 8px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333 !important; /* Ensure the nav items have a good contrast */
+        }
+
+        /* Grid Spacing */
+        .card-deck .card {
+            margin: 10px 0; /* Adds margin between cards */
+        }
+            /* Header Text Color: Set all headers to black */
+        h1, h2, h3, h4, h5, h6, p {
+            color: black; /* Set header text to black */
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="/">Asset Management</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/employees">Employees</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/vehicles">Vehicles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/equipment">Equipment</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/inventory">Inventory</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/job_materials">Job Materials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/maintenance">Maintenance</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content Block -->
+        {% block content %}
+            <div class="row">
+                <!-- Example Card 1 -->
+                <div class="col-md-4">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <h5 class="card-title">Card 1</h5>
+                            <p class="card-text">This is the first card with a floating shadow effect.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Example Card 2 -->
+                <div class="col-md-4">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <h5 class="card-title">Card 2</h5>
+                            <p class="card-text">This is the second card with a floating shadow effect.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Example Card 3 -->
+                <div class="col-md-4">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <h5 class="card-title">Card 3</h5>
+                            <p class="card-text">This is the third card with a floating shadow effect.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+</body>
+</html>

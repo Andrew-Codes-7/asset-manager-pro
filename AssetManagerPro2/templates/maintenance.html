@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="divs">
+        <h2>Vehicle Maintenance</h2>
+
+
+        <h4>Add New Maintenance Item</h4>
+        <form method="POST" action="/maintenance/add">
+            <div class="form-group">
+                <label for="vehicleID">Assign Vehicle Number</label>
+                <select class="form-control" id="vehicleID" name="vehicleID">
+                    <option value="">None</option>
+                    {% for vehicle in vehicles %}
+                        <option value="{{ vehicle.id }}">{{ vehicle.number }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="service_date">Service Date</label>
+                <input type="text" class="form-control" id="service_date" name="service_date" required>
+            </div>
+            <div class="form-group">
+                <label for="service_type">Service Type</label>
+                <input type="text" class="form-control" id="service_type" name="service_type" required>
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <input type="text" class="form-control" id="notes" name="notes" required>
+            </div>
+            <button type="submit" name="add_maintenance" class="btn btn-success mb-3">Add Maintenance</button>
+        </form>
+
+
+        <h4>Maintenance List</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Vehicle ID</th>
+                    <th>Service Date</th>
+                    <th>Service Type</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for maintenance in maintenance_items %}
+                    <tr>
+                        <td>{{ maintenance.vehicle_id }}</td>
+                        <td>{{ maintenance.service_date }}</td>
+                        <td>{{ maintenance.service_type }}</td>
+                        <td>{{ maintenance.notes }}</td>
+                        <td>
+                            <!-- Edit Button (Redirects to Edit Page) -->
+                            <a href="{{ url_for('edit_maintenance', id=maintenance.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                            <!-- Delete Vehicle -->
+                            <form action="/delete_maintenance/{{ maintenance.id }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

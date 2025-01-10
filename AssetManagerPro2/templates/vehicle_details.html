@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3>Maintenance Records for {{ vehicle.number }} ({{ vehicle.make }} {{ vehicle.model }})</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Service Date</th>
+                <th>Service Type</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in maintenance_records %}
+                <tr>
+                    <td>{{ record.service_date }}</td>
+                    <td>{{ record.service_type }}</td>
+                    <td>{{ record.notes }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

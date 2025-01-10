@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="divs">
+        <h2>Job Materials</h2>
+
+        <!-- Add Vehicle Form -->
+        <h4>Add New Job Material</h4>
+        <form method="POST" action="/job_materials/add">
+            <div class="form-group">
+                <label for="job_number">Job Number</label>
+                <input type="text" class="form-control" id="job_number" name="job_number" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
+            <div class="form-group">
+                <label for="brand">Brand</label>
+                <input type="text" class="form-control" id="brand" name="brand" required>
+            </div>
+            <div class="form-group">
+                <label for="part_number">Part Number</label>
+                <input type="text" class="form-control" id="part_number" name="part_number" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity_received">Quantity Received</label>
+                <input type="text" class="form-control" id="quantity_received" name="quantity_received" required>
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <input type="text" class="form-control" id="notes" name="notes">
+            </div>
+            <button type="submit" name="add_job_materials" class="btn btn-success mb-3">Add Job Material(s)</button>
+        </form>
+
+        <!-- Vehicle List -->
+        <h4>Job Materials List</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Job Number</th>
+                    <th>Description</th>
+                    <th>Brand</th>
+                    <th>Part Number</th>
+                    <th>Quantity Received</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for material in materials %}
+                    <tr>
+                        <td>{{ material.job_number }}</td>
+                        <td>{{ material.description }}</td>
+                        <td>{{ material.brand }}</td>
+                        <td>{{ material.part_number }}</td>
+                        <td>{{ material.quantity_received }}</td>
+                        <td>{{ material.notes }}</td>
+                        <td>
+                            <!-- Edit Button (Redirects to Edit Page) -->
+                            <a href="{{ url_for('edit_job_materials', id=material.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                            <!-- Delete Vehicle -->
+                            <form action="/delete_job_materials/{{ material.id }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

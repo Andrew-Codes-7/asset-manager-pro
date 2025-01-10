@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="divs">
+        <h2>Vehicles</h2>
+
+        <!-- Add Vehicle Form -->
+        <h4>Add New Vehicle</h4>
+        <form method="POST" action="/vehicles/add">
+            <div class="form-group">
+                <label for="number">Vehicle Number</label>
+                <input type="text" class="form-control" id="number" name="number" required>
+            </div>
+            <div class="form-group">
+                <label for="make">Make</label>
+                <input type="text" class="form-control" id="make" name="make" required>
+            </div>
+            <div class="form-group">
+                <label for="model">Model</label>
+                <input type="text" class="form-control" id="model" name="model" required>
+            </div>
+            <div class="form-group">
+                <label for="year">Year</label>
+                <input type="text" class="form-control" id="year" name="year" required>
+            </div>
+            <div class="form-group">
+                <label for="oil_change_date">Oil Change Date</label>
+                <input type="text" class="form-control" id="oil_change_date" name="oil_change_date">
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea class="form-control" id="notes" name="notes"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="driver">Assign Employee (Driver)</label>
+                <select class="form-control" id="driver" name="driver">
+                    <option value="">None</option>
+                    {% for employee in employees %}
+                        <option value="{{ employee.id }}">{{ employee.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" name="add_vehicle" class="btn btn-success mb-3">Add Vehicle</button>
+        </form>
+
+        <!-- Vehicle List -->
+        <h4>Vehicle List</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Oil Change</th>
+                    <th>Notes</th>
+                    <th>Driver</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehicle in vehicles %}
+                    <tr>
+                        <td>{{ vehicle.number }}</td>
+                        <td>{{ vehicle.make }}</td>
+                        <td>{{ vehicle.model }}</td>
+                        <td>{{ vehicle.year }}</td>
+                        <td>{{ vehicle.oil_change_date }}</td>
+                        <td>{{ vehicle.notes }}</td>
+                        <td>{{ vehicle.driver_id }}</td>
+                        <td>
+                            <!-- Edit Button (Redirects to Edit Page) -->
+                            <a href="{{ url_for('edit_vehicle', id=vehicle.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                            <!-- Delete Vehicle -->
+                            <form action="/delete_vehicle/{{ vehicle.id }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
